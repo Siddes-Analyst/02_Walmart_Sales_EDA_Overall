@@ -1223,6 +1223,25 @@ region_regg
 ```
 
 ```python
+a = region_regg.drop("Region", axis= 1)
+```
+
+```python
+region_cor = a.corr()
+sns.heatmap(region_cor,vmin= -1, vmax= 1 ,annot= True)
+plt.show()
+```
+
+![](All_files_in_one/Q_11_Region_Heatmap)
+
+```python
+cat_regg = df_neg_reg.groupby("Category")[["Quantity","Profit"]].sum().reset_index()
+cat_regg.columns = ["Category", "Quantity", "Profit"]
+cat_regg["Per_Unit"] = cat_regg["Profit"] / cat_regg["Quantity"]
+cat_regg
+```
+
+```python
 b = cat_regg.drop("Category", axis= 1)
 ```
 
