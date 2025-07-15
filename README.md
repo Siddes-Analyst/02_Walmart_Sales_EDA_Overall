@@ -1446,6 +1446,7 @@ analysis_bottom
 - #### *56% of (Negative) Profit*
 #### These may be discount-driven buyers → suggesting repricing to improve profit.
 
+
 # 🛒 Walmart Sales EDA(Exploratory Data Analysis) - Project Documentation:
 
 ![](All_files_in_one/05_Doc_page_1.jpg)
