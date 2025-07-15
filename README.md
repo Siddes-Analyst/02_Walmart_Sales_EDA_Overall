@@ -1232,7 +1232,7 @@ sns.heatmap(region_cor,vmin= -1, vmax= 1 ,annot= True)
 plt.show()
 ```
 
-![](All_files_in_one/Q_11_Region_Heatmap)
+![](All_files_in_one/Q_11_Region_Heatmap.png)
 
 ```python
 cat_regg = df_neg_reg.groupby("Category")[["Quantity","Profit"]].sum().reset_index()
