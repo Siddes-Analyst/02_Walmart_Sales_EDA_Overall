@@ -226,7 +226,7 @@ sns.barplot(x= df_2024_months["Month"], y= df_2024_months["Profit"])
 plt.show()
 ```
     
-![png](output_35_0.png)
+![](All_files_in_one/Q_02_01_Monthly_Profit.png)
     
 ```python
 df_march = df_2024[df_2024["Month"] == 3]
@@ -283,7 +283,7 @@ plt.ylabel("Profit")
 plt.show()
 ```
     
-![png](output_42_0.png)
+![](All_files_in_one/Q_02_02_Region_wise_Distribution.png)
     
 
 ### <b><font color= #FFFF00> Category wise Distribution:
@@ -316,7 +316,7 @@ plt.ylabel("Profit")
 plt.show()
 ```
     
-![png](output_46_0.png)
+![](All_files_in_one/Q_02_03_Category_wise_Distribution.png)
     
 ### <b><font color= #FFFF00> Both wise Distribution:
 
@@ -348,7 +348,7 @@ sns.barplot(x="Category", y="Profit", hue="Region", data=grouped)
 plt.show()
 ```
     
-![png](output_50_0.png)
+![](All_files_in_one/Q_02_04_both_wise_Distribution.png)
     
 ### <b> <font color= #ABFF00> Conclusion:
 - #### Past year is `2024` – 492 records.
@@ -439,7 +439,7 @@ plt.ylabel("Sales")
 plt.show()
 ```
    
-![png](output_61_0.png)
+![](All_files_in_one/Q_03_01_East_Region_Distribution.png)
 
 ### <b><font color= #FFFF00> Office_Suppliers Distribution:
 
@@ -500,7 +500,7 @@ plt.ylabel("Sales")
 plt.show()
 ```
     
-![png](output_66_0.png)
+![](All_files_in_one/Q_03_02_West_Region_Distribution.png)
     
 
 ### <b><font color= #FFFF00> Technology Distribution:
@@ -562,7 +562,7 @@ plt.ylabel("Sales")
 plt.show()
 ```
   
-![png](output_71_0.png)   
+![](All_files_in_one/Q_03_03_North_Region_Distribution.png)   
 
 ### <b><font color= #FFFF00> East Region Distribution:
 
@@ -627,7 +627,7 @@ plt.ylabel("Sales")
 plt.show()
 ```
   
-![png](output_77_0.png)
+![](All_files_in_one/Q_03_04_South_Region_Distribution.png)
     
 
 ### <b><font color= #FFFF00> West Region Distribution:
@@ -688,7 +688,7 @@ plt.title("West sales on Negative Profit")
 plt.ylabel("Sales")
 plt.show()
 ```   
-![png](output_82_0.png)
+![](All_files_in_one/Q_03_05_Furniture_Distribution.png)
     
 ### <b><font color= #FFFF00> North Region Distribution:
 
@@ -748,7 +748,7 @@ plt.ylabel("Sales")
 plt.show()
 ```
     
-![png](output_87_0.png)    
+![](All_files_in_one/Q_03_06_Office_Supplies_Distribution.png)    
 
 ### <b><font color= #FFFF00> South Region Distribution:
 
@@ -808,7 +808,7 @@ plt.ylabel("Sales")
 plt.show()
 ```
   
-![png](output_92_0.png)
+![](All_files_in_one/Q_03_07_Technology_Distribution.png)
     
 ### <b><font color= #FFFF00> Overall Visualization:
 
@@ -820,7 +820,7 @@ plt.ylabel("Sales")
 plt.show()
 ```
    
-![png](output_94_0.png)
+![](All_files_in_one/Q_03_08_Overall_Distribution.png)
     
 ```python
 region_quantity = df_neg_profit.pivot_table(index="Quantity", columns="Region", values="Sales", aggfunc="sum")
@@ -829,7 +829,7 @@ plt.title("Sales with Negative Profit by Quantity and Region")
 plt.show()
 ```
   
-![png](output_95_0.png)
+![](All_files_in_one/Q_03_Heatmap_Distribution.png)
     
 ### <b> <font color= #ABFF00> Conclusion:
 - #### The same quantities — especially `1`, `3`, and `6` units — are showing up again and again in loss-making orders.
