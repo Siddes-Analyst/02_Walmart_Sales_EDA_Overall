@@ -1,6 +1,4 @@
-# 🛒 Walmart Null Value Handling - Full Project Journal (One Example)
-
-# <b> <font color= #ABFF00> Walmart EDA(Exploratory Data Analysis)
+# 🛒 Walmart Sales EDA(Exploratory Data Analysis) - Full Project Journal
 
 ### <b><font color= #FFFF00> General Topics:
 - #### *Import the libraries*
