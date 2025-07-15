@@ -6,14 +6,12 @@
 - #### *Drop Duplicate Rows*
 - #### *Change column format(if need)*
 
-
 ```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 ```
-
 
 ```python
 df = pd.read_csv(r"D:\B_Data_Anlysist_Project\Python_Projects\02_Walmart_EDA\eda_walmart_sales_dataset.csv")
@@ -23,7 +21,6 @@ df.head()
 ```python
 df.info()
 ```
-
     <class 'pandas.core.frame.DataFrame'>
     RangeIndex: 1000 entries, 0 to 999
     Data columns (total 10 columns):
@@ -42,17 +39,13 @@ df.info()
     dtypes: float64(2), int64(1), object(7)
     memory usage: 78.3+ KB
 
-
-
 ```python
 df.drop_duplicates(inplace= True)
 ```
 
-
 ```python
 df["Order Date"] = pd.to_datetime(df["Order Date"])
 ```
-
 
 ```python
 df.info()
@@ -76,10 +69,8 @@ df.info()
     dtypes: datetime64[ns](1), float64(2), int64(1), object(6)
     memory usage: 78.3+ KB
 
-
 ### <b><font color= #FFFF00> Q1.Customer Segmentation Challenge:
 #### *Identify the top 10% of customers who contributed the most to the total profit. What common characteristics (region, category, city) do they share?*
-
 
 ```python
 customer_profit = df.groupby("Customer ID")["Profit"].sum().reset_index()
@@ -108,7 +99,6 @@ top_df
 
 ### <b><font color= #FFFF00> Region column:
 
-
 ```python
 region = top_df["Region"].value_counts()
 region_index = region.index
@@ -119,7 +109,6 @@ region_values = region.values
 region = top_df["Region"].value_counts()
 region
 ```
-
 
     Region
     West     30
@@ -135,17 +124,13 @@ plt.show
 
 ![png](output_17_1.png)
     
-
-
 ### <b><font color= #FFFF00> Category column:
-
 
 ```python
 category = top_df["Category"].value_counts()
 category_index = category.index
 category_value = category.values
 ```
-
 
 ```python
 print(top_df["Category"].value_counts())
@@ -157,20 +142,13 @@ print(top_df["Category"].value_counts())
     Technology         30
     Name: count, dtype: int64
 
-
-
 ```python
 sns.barplot(x= category_index,y= category_value)
 plt.show()
 ```
-
-
-    
+  
 ![png](output_21_0.png)
     
-
-
-
 ```python
 print(top_df["City"].value_counts().head(10))
 ```
@@ -188,7 +166,6 @@ print(top_df["City"].value_counts().head(10))
     New Rachaelhaven     1
     Name: count, dtype: int64
 
-
 ### <b> <font color= #ABFF00> Conclusion:
 - #### `Region`: Distribution is fairly even, but [East] has a slight edge.
 - #### `Category`: [Furniture] appears more frequently.
@@ -196,7 +173,6 @@ print(top_df["City"].value_counts().head(10))
 
 ### <b><font color= #FFFF00> Q2. Monthly Sales Recovery Strategy:
 #### *Determine which month in the past year had the lowest overall profit. What specific product category and region contributed most to this loss?*
-
 
 ```python
 df_loss = pd.DataFrame(df)
@@ -207,16 +183,13 @@ df_loss.head()
 df_loss["Order Date"].nunique()
 ```
 
-
 ```python
 df_loss["Year"] = df_loss["Order Date"].dt.year
 ```
 
-
 ```python
 df_loss["Month"] = df_loss["Order Date"].dt.month
 ```
-
 
 ```python
 df_loss["Year"].unique()
@@ -231,7 +204,6 @@ df_loss["Year"].value_counts()
     2025    275
     2023    233
     Name: count, dtype: int64
-
 ```python
 df_2024 = df_loss[df_loss["Year"] == 2024]
 df_2024
@@ -249,7 +221,6 @@ df_2024_months = df_2024_months.sort_values(by= "Profit", ascending= False)
 df_2024_months
 ```
 
-
 ```python
 sns.barplot(x= df_2024_months["Month"], y= df_2024_months["Profit"])
 plt.show()
@@ -257,12 +228,10 @@ plt.show()
     
 ![png](output_35_0.png)
     
-
 ```python
 df_march = df_2024[df_2024["Month"] == 3]
 df_march.head()
 ```
-
 
 ```python
 df_march["Profit"].info()
@@ -283,13 +252,9 @@ df_march["Profit"].sum()
 
 ### <b><font color= #FFFF00> Region wise Distribution:
 
-
 ```python
 df_march["Region"].value_counts()
 ```
-
-
-
 
     Region
     North    13
@@ -298,16 +263,10 @@ df_march["Region"].value_counts()
     East      7
     Name: count, dtype: int64
 
-
-
-
 ```python
 region = df_march.groupby("Region")["Profit"].sum()
 region
 ```
-
-
-
 
     Region
     East    -282.76
@@ -316,9 +275,6 @@ region
     West     -57.15
     Name: Profit, dtype: float64
 
-
-
-
 ```python
 region.index
 region.values
@@ -326,48 +282,31 @@ sns.barplot(x= region.index, y= region.values)
 plt.ylabel("Profit")
 plt.show()
 ```
-
-
     
 ![png](output_42_0.png)
     
 
-
 ### <b><font color= #FFFF00> Category wise Distribution:
-
 
 ```python
 df_march["Category"].value_counts()
 ```
-
-
-
-
     Category
     Office Supplies    18
     Furniture          12
     Technology         11
     Name: count, dtype: int64
 
-
-
-
 ```python
 Category = df_march.groupby("Category")["Profit"].sum()
 Category
 ```
-
-
-
 
     Category
     Furniture          199.04
     Office Supplies   -307.96
     Technology        -143.30
     Name: Profit, dtype: float64
-
-
-
 
 ```python
 Category.index
@@ -380,7 +319,6 @@ plt.show()
 ![png](output_46_0.png)
     
 ### <b><font color= #FFFF00> Both wise Distribution:
-
 
 ```python
 df_march.groupby(["Category","Region"])["Profit"].sum()
@@ -405,7 +343,6 @@ df_march.groupby(["Category","Region"])["Profit"].sum()
 grouped = df_march.groupby(["Category", "Region"])["Profit"].sum().reset_index()
 ```
 
-
 ```python
 sns.barplot(x="Category", y="Profit", hue="Region", data=grouped)
 plt.show()
@@ -413,7 +350,6 @@ plt.show()
     
 ![png](output_50_0.png)
     
-
 ### <b> <font color= #ABFF00> Conclusion:
 - #### Past year is `2024` – 492 records.
 - #### `March` Month make the least amount of loss profit. Loss is `-252.22`.
@@ -438,16 +374,13 @@ df_neg_profit
 df_neg_profit.groupby("Category").agg({"Category" : "count"})
 ```
 
-
 ```python
 df_neg_profit["Quantity"].unique()
 ```
 
 array([7, 8, 6, 2, 1, 9, 3, 5, 4], dtype=int64)
 
-
 ### <b><font color= #FFFF00> Furniture Distribution:
-
 
 ```python
 df_count_furniture = df_neg_profit[df_neg_profit["Category"] == "Furniture"].groupby("Quantity")["Profit"].count()
@@ -572,7 +505,6 @@ plt.show()
 
 ### <b><font color= #FFFF00> Technology Distribution:
 
-
 ```python
 df_count_Technology = df_neg_profit[df_neg_profit["Category"] == "Technology"].groupby("Quantity")["Profit"].count()
 df_count_Technology
@@ -630,11 +562,9 @@ plt.ylabel("Sales")
 plt.show()
 ```
   
-![png](output_71_0.png)
-    
+![png](output_71_0.png)   
 
 ### <b><font color= #FFFF00> East Region Distribution:
-
 
 ```python
 df_neg_profit["Region"].unique()
@@ -702,7 +632,6 @@ plt.show()
 
 ### <b><font color= #FFFF00> West Region Distribution:
 
-
 ```python
 df_profit_West = df_neg_profit[df_neg_profit["Region"] == "West"].groupby("Quantity")["Profit"].count()
 df_profit_West
@@ -763,7 +692,6 @@ plt.show()
     
 ### <b><font color= #FFFF00> North Region Distribution:
 
-
 ```python
 df_profit_North = df_neg_profit[df_neg_profit["Region"] == "North"].groupby("Quantity")["Profit"].count()
 df_profit_North
@@ -820,11 +748,9 @@ plt.ylabel("Sales")
 plt.show()
 ```
     
-![png](output_87_0.png)
-    
+![png](output_87_0.png)    
 
 ### <b><font color= #FFFF00> South Region Distribution:
-
 
 ```python
 df_profit_South = df_neg_profit[df_neg_profit["Region"] == "South"].groupby("Quantity")["Profit"].count()
@@ -884,7 +810,6 @@ plt.show()
   
 ![png](output_92_0.png)
     
-
 ### <b><font color= #FFFF00> Overall Visualization:
 
 ```python
@@ -897,7 +822,6 @@ plt.show()
    
 ![png](output_94_0.png)
     
-
 ```python
 region_quantity = df_neg_profit.pivot_table(index="Quantity", columns="Region", values="Sales", aggfunc="sum")
 sns.heatmap(region_quantity, annot=True, cmap="YlOrRd", fmt=".0f")
@@ -925,9 +849,6 @@ df_product_mix.head()
 df_product_mix.groupby(["Region","Category"])["Sales"].sum()
 ```
 
-
-
-
     Region  Category       
     East    Furniture          44515.40
             Office Supplies    43166.97
@@ -942,9 +863,6 @@ df_product_mix.groupby(["Region","Category"])["Sales"].sum()
             Office Supplies    39181.65
             Technology         41876.95
     Name: Sales, dtype: float64
-
-
-
 
 ```python
 df_sales = df_product_mix.pivot_table(index= "Region", columns= "Category", values= "Sales", aggfunc= "sum")
@@ -973,14 +891,9 @@ plt.ylabel("Profit")
 plt.tight_layout()
 plt.show()
 ```
-
-
     
 ![png](output_103_0.png)
     
-
-
-
 ```python
 df_north_office = df_product_mix[(df_product_mix["Region"] == "North") & (df_product_mix["Category"] == "Office Supplies")]
 df_north_office
@@ -1030,7 +943,6 @@ sum(Furniture_negative_profit.values)
 ### <b><font color= #FFFF00> Q5. Demand Prediction Case:
 #### *Using historical data, identify if there is a trend or seasonal pattern in quantity sold for each product category over time.*
 
-
 ```python
 df_trend_season = pd.DataFrame(df)
 df_trend_season.head()
@@ -1040,21 +952,17 @@ df_trend_season.head()
 df_trend_season["Order Date"] = pd.to_datetime(df_trend_season["Order Date"])
 ```
 
-
 ```python
 df_trend_season["Year"] = df_trend_season["Order Date"].dt.year
 ```
-
 
 ```python
 df_trend_season["Month"] = df_trend_season["Order Date"].dt.month
 ```
 
-
 ```python
 df_trend_season["Year-Month"] = df_trend_season["Order Date"].dt.to_period("M")
 ```
-
 
 ```python
 monthly_trend = df_trend_season.groupby(['Year-Month', 'Category'])['Quantity'].sum().reset_index()
@@ -1076,13 +984,9 @@ plt.grid(True)
 plt.tight_layout()
 plt.show()
 ```
-
-
-    
+  
 ![png](output_121_0.png)
     
-
-
 ### <b> <font color= #ABFF00> Conclusion:
 #### There is both a trend and seasonality present in the quantity sold over time:
 - #### Trends: Increasing demand (especially for Office Supplies).
@@ -1090,7 +994,6 @@ plt.show()
 
 ### <b><font color= #FFFF00> Q6. Loss-Leading Product Investigation:
 #### *Find products or categories that have repeatedly shown negative profit despite high sales. Should they be discontinued or repriced?*
-
 
 ```python
 df_high_sales = pd.DataFrame(df)
@@ -1148,7 +1051,6 @@ per = (tot.values/tot_sum)*100
 ### <b><font color= #FFFF00> Q7. Regional Sales Consistency:
 #### *Which region shows the most stable monthly sales performance over time? Use standard deviation or coefficient of variation to support your analysis.*
 
-
 ```python
 df_std_cv = pd.DataFrame(df)
 df_std_cv.head()
@@ -1158,11 +1060,9 @@ df_std_cv.head()
 df_std_cv["Order Date"] = pd.to_datetime(df_std_cv["Order Date"])
 ```
 
-
 ```python
 df_std_cv["month_year"] = df_std_cv["Order Date"].dt.to_period("M")
 ```
-
 
 ```python
 monthly_sales = df_std_cv.groupby(["Region", "month_year"])["Sales"].sum().reset_index()
@@ -1174,11 +1074,9 @@ region_sales = monthly_sales.groupby("Region")["Sales"].agg(["mean","std"]).rese
 region_sales
 ```
 
-
 ```python
 region_sales["cv"] = region_sales["std"] / region_sales["mean"]
 ```
-
 
 ```python
 region_sales.sort_values(by= "cv")
@@ -1191,16 +1089,13 @@ region_sales.sort_values(by= "cv")
 ### <b><font color= #FFFF00> Q8. Customer Retention Analysis:
 #### *Based on Customer ID, find the number of repeats vs. one-time customers. How does their average profit and sales differ?*
 
-
 ```python
 df_customer = pd.DataFrame(df)
 ```
 
-
 ```python
 df_customer["Order Date"] = pd.to_datetime(df_customer["Order Date"])
 ```
-
 
 ```python
 df_customer.head()
@@ -1210,11 +1105,9 @@ df_customer.head()
 customer_count = df_customer["Customer ID"].value_counts()
 ```
 
-
 ```python
 df_customer["customer_type"] = df_customer["Customer ID"].apply(lambda x : "repeat" if customer_count[x] > 1 else "one_time")
 ```
-
 
 ```python
 df_customer["customer_type"].value_counts()
@@ -1223,7 +1116,6 @@ df_customer["customer_type"].value_counts()
     one_time    912
     repeat       88
     Name: count, dtype: int64
-
 ```python
 customer_summary = df_customer.groupby("customer_type")[["Sales","Profit"]].sum()
 customer_summary
@@ -1249,21 +1141,17 @@ customer_summary
 ### <b><font color= #FFFF00> Q9. Bulk Buying Patterns:
 #### *Are their specific cities or regions where customers consistently buy in higher quantities than average? What product categories are driving this?*
 
-
 ```python
 df_cit_reg = pd.DataFrame(df)
 ```
-
 
 ```python
 region_agg = df_cit_reg.groupby("Region")[["Quantity"]].agg(["count","std","mean"]).reset_index()
 ```
 
-
 ```python
 region_agg["total_avg"] = df_cit_reg["Quantity"].mean()
 ```
-
 
 ```python
 region_agg
@@ -1275,16 +1163,13 @@ a.columns = ["City", "count"]
 b = a[a["count"] > 1]
 ```
 
-
 ```python
 city_filter = df_cit_reg[df_cit_reg["City"].isin(b["City"])]
 ```
 
-
 ```python
 city_agg = city_filter.groupby("City")[["Quantity"]].agg(["count","mean","std"]).reset_index()
 ```
-
 
 ```python
 city_agg["total_avg"] = df_cit_reg["Quantity"].mean()
@@ -1340,7 +1225,6 @@ bottom_10_profit
 df_neg_reg = pd.DataFrame(df)
 ```
 
-
 ```python
 region_regg = df_neg_reg.groupby("Region")[["Quantity","Profit"]].sum().reset_index()
 region_regg.columns = ["Region", "Quantity", "Profit"]
@@ -1348,24 +1232,18 @@ region_regg["Per_Unit"] = region_regg["Profit"] / region_regg["Quantity"]
 region_regg
 ```
 
-
 ```python
 b = cat_regg.drop("Category", axis= 1)
 ```
-
 
 ```python
 cat_cor = b.corr()
 sns.heatmap(cat_cor,vmin= -1, vmax= 1 ,annot= True)
 plt.show()
 ```
-
-
     
 ![png](output_177_0.png)
     
-
-
 ### <b> <font color= #ABFF00> Conclusion:
 - #### According to the region segment – Yes negative correlation between quantity sold and profit per unit is occurring and negative correlation value = `-0.36`.
 - #### According to the Category segment – Yes negative correlation between quantity sold and profit per unit is occurring and Occurring negative correlation value = `-0.92`.
@@ -1373,48 +1251,40 @@ plt.show()
 ### <b><font color= #FFFF00> Q12. Campaign Impact Simulation:
 #### *Assume Walmart ran a 10% discount campaign in August 2024. Recalculate profit for that month and evaluate how the campaign would have affected overall profitability.*
 
-
 ```python
 df_aug_10 = pd.DataFrame(df)
 df_aug_10.head()
 ```
-
 
 ```python
 df_extract_aug = df_aug_10[(df_aug_10["Order Date"] >= "2024-08-01") & (df_aug_10["Order Date"] <= "2024-08-31")]
 df_extract_aug.reset_index().head()
 ```
 
-
 ```python
 august_10_per = df_extract_aug["Profit"] - (df_extract_aug["Profit"] / 100) * 10
 august_10_per.head()
 ```
-
 
 ```python
 seperate_aug = df_aug_10["Profit"].sum() - df_extract_aug["Profit"].sum()
 seperate_aug
 ```
 
-
 ```python
 overall_10_profit = seperate_aug + august_10_per.sum()
 overall_10_profit
 ```
-
 
 ```python
 without_dis = round(df_aug_10["Profit"].sum() / df_aug_10["Profit"].count(), 2)
 without_dis
 ```
 
-
 ```python
 with_10_dis = round(overall_10_profit / df_aug_10["Profit"].count(), 2)
 with_10_dis
 ```
-
 
 ### <b> <font color= #ABFF00> Conclusion:
 ##### *Before 10% discount: ₹25.86 profit/order*
@@ -1426,16 +1296,13 @@ with_10_dis
 ### <b><font color= #FFFF00> Q13. Return Risk Zones:
 #### *If high-quantity orders with low profit are considered risky for returns, which region shows the highest risk exposure?*
 
-
 ```python
 df_return_risk = pd.DataFrame(df)
 ```
 
-
 ```python
 df_return_risk.groupby(["Region", "Quantity"])[["Quantity", "Profit"]].sum()
 ```
-
 
 ```python
 sep_east = df_return_risk[(df_return_risk["Region"] == "East") & (df_return_risk["Quantity"] == 9)]
@@ -1443,13 +1310,11 @@ q_east = sep_east["Quantity"].sum()
 p_east = sep_east["Profit"].sum()
 ```
 
-
 ```python
 sep_east = df_return_risk[(df_return_risk["Region"] == "South") & (df_return_risk["Quantity"] == 9)]
 q_south = sep_east["Quantity"].sum()
 p_south = sep_east["Profit"].sum()
 ```
-
 
 ```python
 sep_east = df_return_risk[(df_return_risk["Region"] == "North") & (df_return_risk["Quantity"] == 8)]
@@ -1457,13 +1322,11 @@ q_north = sep_east["Quantity"].sum()
 p_north = sep_east["Profit"].sum()
 ```
 
-
 ```python
 sep_east = df_return_risk[(df_return_risk["Region"] == "West") & (df_return_risk["Quantity"] == 8)]
 q_west = sep_east["Quantity"].sum()
 p_west = sep_east["Profit"].sum()
 ```
-
 
 ```python
 join = pd.DataFrame({
@@ -1471,7 +1334,6 @@ join = pd.DataFrame({
     "Profit_sum" : [p_east, p_south, p_north, p_west]
              }, index= ["east", "south", "north", "west"])
 ```
-
 
 ```python
 join["Profit_perc"] = (join["Profit_sum"] / join["Profit_sum"].sum()) * 100
@@ -1484,7 +1346,6 @@ join
 
 ### <b><font color= #FFFF00> Q14. Return Risk Zones:
 #### *Calculate how many days (based on order date) it took each region to cross a cumulative profit of ₹5,000. Who was fastest?*
-
 
 ```python
 df_time = df.copy()
@@ -1504,7 +1365,6 @@ filter_3
 ### <b><font color= #FFFF00> Q15. High-Impact Customer Recovery Plan:
 #### *Identify the bottom 5% of customers by profit. Suggest a personalized sales strategy for them based on their past order behaviour.*
 
-
 ```python
 df_bottom = df.copy()
 ```
@@ -1518,7 +1378,6 @@ df_filter = df_bottom.groupby(["Customer ID"])["Profit"].sum().reset_index()
 df_filter = df_fil.sort_values(by= "Profit")
 ```
 
-
 ```python
 df_fill_5 = round((df_filter["Profit"].count()/100)*5)
 bottom_5 = df_filter.head(df_fill_5)
@@ -1527,7 +1386,6 @@ bottom_5 = df_filter.head(df_fill_5)
 ```python
 filtered_bottom_5 = df_bottom[df_bottom["Customer ID"].isin(bottom_5["Customer ID"])]
 ```
-
 
 ```python
 analysis_bottom = filtered_bottom_5.groupby("Quantity")[["Quantity","Sales","Profit"]].sum()
@@ -1539,16 +1397,13 @@ analysis_bottom.reset_index()
 analysis_bottom["Quantity_per"] = round((analysis_bottom["Quantity_counts"] / analysis_bottom["Quantity_counts"].sum())*100)
 ```
 
-
 ```python
 analysis_bottom["Sales_per"] = round((analysis_bottom["Sales"] / analysis_bottom["Sales"].sum())*100)
 ```
 
-
 ```python
 analysis_bottom["Profit_per"] = round((analysis_bottom["Profit"] / analysis_bottom["Profit"].sum())*100)
 ```
-
 
 ```python
 analysis_bottom
@@ -1560,13 +1415,3 @@ analysis_bottom
 - #### *60% of Sales*
 - #### *56% of (Negative) Profit*
 #### These may be discount-driven buyers → suggesting repricing to improve profit.
-
-
-```python
-
-```
-
-
-```python
-
-```
