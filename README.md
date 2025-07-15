@@ -1,6 +1,6 @@
 # 🛒 Walmart Sales EDA(Exploratory Data Analysis) - Full Project Journal
 
-### <b><font color= #FFFF00> General Topics:
+### <b>General Topics:
 - #### *Import the libraries*
 - #### *Load the Dataset*
 - #### *Drop Duplicate Rows*
@@ -69,7 +69,7 @@ df.info()
     dtypes: datetime64[ns](1), float64(2), int64(1), object(6)
     memory usage: 78.3+ KB
 
-### <b><font color= #FFFF00> Q1.Customer Segmentation Challenge:
+### <b>Q1.Customer Segmentation Challenge:
 #### *Identify the top 10% of customers who contributed the most to the total profit. What common characteristics (region, category, city) do they share?*
 
 ```python
@@ -97,7 +97,7 @@ top_df = df[df["Customer ID"].isin(top_10_percent_df["Customer ID"])]
 top_df
 ```
 
-### <b><font color= #FFFF00> Region column:
+### <b>Region column:
 
 ```python
 region = top_df["Region"].value_counts()
@@ -124,7 +124,7 @@ plt.show
 
 ![](All_files_in_one/Q_01_01_region_Count.png)
     
-### <b><font color= #FFFF00> Category column:
+### <b>Category column:
 
 ```python
 category = top_df["Category"].value_counts()
@@ -166,12 +166,12 @@ print(top_df["City"].value_counts().head(10))
     New Rachaelhaven     1
     Name: count, dtype: int64
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b> Conclusion:
 - #### `Region`: Distribution is fairly even, but [East] has a slight edge.
 - #### `Category`: [Furniture] appears more frequently.
 - #### `City`: One or two cities like [South Megan] show up more than once, but no strong city dominance.
 
-### <b><font color= #FFFF00> Q2. Monthly Sales Recovery Strategy:
+### <b>Q2. Monthly Sales Recovery Strategy:
 #### *Determine which month in the past year had the lowest overall profit. What specific product category and region contributed most to this loss?*
 
 ```python
@@ -209,7 +209,7 @@ df_2024 = df_loss[df_loss["Year"] == 2024]
 df_2024
 ```
 
-### <b><font color= #FFFF00> Monthly profit:
+### <b>Monthly profit:
 
 ```python
 df_2024_months = df_2024.groupby("Month")["Profit"].sum().reset_index()
@@ -250,7 +250,7 @@ df_march["Profit"].info()
 df_march["Profit"].sum()
 ```
 
-### <b><font color= #FFFF00> Region wise Distribution:
+### <b>Region wise Distribution:
 
 ```python
 df_march["Region"].value_counts()
@@ -286,7 +286,7 @@ plt.show()
 ![](All_files_in_one/Q_02_02_Region_wise_Distribution.png)
     
 
-### <b><font color= #FFFF00> Category wise Distribution:
+### <b>Category wise Distribution:
 
 ```python
 df_march["Category"].value_counts()
@@ -318,7 +318,7 @@ plt.show()
     
 ![](All_files_in_one/Q_02_03_Category_wise_Distribution.png)
     
-### <b><font color= #FFFF00> Both wise Distribution:
+### <b>Both wise Distribution:
 
 ```python
 df_march.groupby(["Category","Region"])["Profit"].sum()
@@ -350,7 +350,7 @@ plt.show()
     
 ![](All_files_in_one/Q_02_04_both_wise_Distribution.png)
     
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 - #### Past year is `2024` – 492 records.
 - #### `March` Month make the least amount of loss profit. Loss is `-252.22`.
 - #### March month dissection Region wise `South` made a more amount of lose. Loss is `-486.86`.
