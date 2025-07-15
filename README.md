@@ -870,6 +870,16 @@ df_sales
 ```
 
 ```python
+df_sales.plot(kind= "bar", figsize= (10,7))
+plt.title("Region wise Category Sales")
+plt.ylabel("Sales")
+plt.tight_layout()
+plt.show()
+```
+
+![](All_files_in_one/Q_04_01_Region_wise_cat_sales.png)
+
+```python
 df_profit = df_product_mix.pivot_table(index= "Region", columns= "Category", values= "Profit", aggfunc= "sum")
 df_profit
 ```
@@ -882,7 +892,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![](All_files_in_one/Q_04_Region_wise_cat_sales.png)
+![](All_files_in_one/Q_04_02_Region_wise_cat_sales.png)
 
 ```python
 df_north_office = df_product_mix[(df_product_mix["Region"] == "North") & (df_product_mix["Category"] == "Office Supplies")]
@@ -1144,10 +1154,6 @@ region_agg["total_avg"] = df_cit_reg["Quantity"].mean()
 ```
 
 ```python
-region_agg
-```
-
-```python
 a = df_cit_reg["City"].value_counts().reset_index()
 a.columns = ["City", "count"]
 b = a[a["count"] > 1]
@@ -1362,9 +1368,28 @@ df_time.head()
 ```
 
 ```python
+filter_1 = df_time.groupby(["Region", "Order Date"])["Profit"].sum().reset_index()
+filter_1 = filter_1.sort_values(["Region", "Order Date"])
+filter_1["cumsum"] = filter_1.groupby("Region")["Profit"].cumsum()
+```
+
+```python
+filter_2 = filter_1[filter_1["cumsum"] > 1000]
+filter_2 = filter_2.groupby("Region")["Order Date"].first().reset_index()
+filter_2.columns = ["Region", "Last_day"]
+filter_2
+```
+
+```python
 filter_3 = df_time.groupby(["Region"])["Order Date"].min().reset_index()
 filter_3.columns = ["Region", "First_day"]
 filter_3
+```
+
+```python
+day_count = pd.merge(filter_2, filter_3, on= "Region")
+day_count["Day_counts"] = day_count["Last_day"] - day_count["First_day"]
+day_count
 ```
 
 ### <b> <font color= #ABFF00> Conclusion:
@@ -1376,10 +1401,6 @@ filter_3
 
 ```python
 df_bottom = df.copy()
-```
-
-```python
-df_bottom.head()
 ```
 
 ```python
