@@ -868,8 +868,6 @@ df_product_mix.groupby(["Region","Category"])["Sales"].sum()
 df_sales = df_product_mix.pivot_table(index= "Region", columns= "Category", values= "Sales", aggfunc= "sum")
 df_sales
 ```
- 
-![](All_files_in_one/Q_04_Region_wise_cat_sales.png)
 
 ```python
 df_profit = df_product_mix.pivot_table(index= "Region", columns= "Category", values= "Profit", aggfunc= "sum")
@@ -883,7 +881,9 @@ plt.ylabel("Profit")
 plt.tight_layout()
 plt.show()
 ```
-   
+
+![](All_files_in_one/Q_04_Region_wise_cat_sales.png)
+
 ```python
 df_north_office = df_product_mix[(df_product_mix["Region"] == "North") & (df_product_mix["Category"] == "Office Supplies")]
 df_north_office
