@@ -868,16 +868,8 @@ df_product_mix.groupby(["Region","Category"])["Sales"].sum()
 df_sales = df_product_mix.pivot_table(index= "Region", columns= "Category", values= "Sales", aggfunc= "sum")
 df_sales
 ```
-
-```python
-df_sales.plot(kind= "bar", figsize= (10,7))
-plt.title("Region wise Category Sales")
-plt.ylabel("Sales")
-plt.tight_layout()
-plt.show()
-```
-  
-![png](output_101_0.png)
+ 
+![](All_files_in_one/Q_04_Region_wise_cat_sales.png)
 
 ```python
 df_profit = df_product_mix.pivot_table(index= "Region", columns= "Category", values= "Profit", aggfunc= "sum")
@@ -891,9 +883,7 @@ plt.ylabel("Profit")
 plt.tight_layout()
 plt.show()
 ```
-    
-![png](output_103_0.png)
-    
+   
 ```python
 df_north_office = df_product_mix[(df_product_mix["Region"] == "North") & (df_product_mix["Category"] == "Office Supplies")]
 df_north_office
@@ -985,7 +975,7 @@ plt.tight_layout()
 plt.show()
 ```
   
-![png](output_121_0.png)
+![](All_files_in_one/Q_05_Monthly_Quantity_sold_cat.png)
     
 ### <b> <font color= #ABFF00> Conclusion:
 #### There is both a trend and seasonality present in the quantity sold over time:
@@ -1242,7 +1232,7 @@ sns.heatmap(cat_cor,vmin= -1, vmax= 1 ,annot= True)
 plt.show()
 ```
     
-![png](output_177_0.png)
+![](All_files_in_one/Q_11_Category_Heatmap.png)
     
 ### <b> <font color= #ABFF00> Conclusion:
 - #### According to the region segment – Yes negative correlation between quantity sold and profit per unit is occurring and negative correlation value = `-0.36`.
