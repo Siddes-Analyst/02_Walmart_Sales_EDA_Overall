@@ -122,7 +122,7 @@ sns.barplot(x= region_index, y= region_values)
 plt.show
 ```
 
-![png](output_17_1.png)
+![](All_files_in_one/Q_01_01_region_Count.png)
     
 ### <b><font color= #FFFF00> Category column:
 
@@ -147,7 +147,7 @@ sns.barplot(x= category_index,y= category_value)
 plt.show()
 ```
   
-![png](output_21_0.png)
+![](All_files_in_one/Q_01_02_Category_Count.png)
     
 ```python
 print(top_df["City"].value_counts().head(10))
