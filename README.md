@@ -69,7 +69,7 @@ df.info()
     dtypes: datetime64[ns](1), float64(2), int64(1), object(6)
     memory usage: 78.3+ KB
 
-### <b>Q1.Customer Segmentation Challenge:
+### <b>Q1. Customer Segmentation Challenge:
 #### *Identify the top 10% of customers who contributed the most to the total profit. What common characteristics (region, category, city) do they share?*
 
 ```python
@@ -357,7 +357,7 @@ plt.show()
 - #### Category wise `Office Supplies` made a more amount of lose. Loss is `-307.96`.
 - #### Both `Region` and `Category` wise `south` & `Office Supplies` made a more amount of lose. Loss is `-365.34`.
 
-### <b><font color= #FFFF00> Q3. Profitability Anomaly Detection:
+### <b>Q3. Profitability Anomaly Detection:
 #### *Identify any orders with high sales but negative profit. What patterns do you notice in terms of region, category, or quantity?*
 
 ```python
@@ -380,7 +380,7 @@ df_neg_profit["Quantity"].unique()
 
 array([7, 8, 6, 2, 1, 9, 3, 5, 4], dtype=int64)
 
-### <b><font color= #FFFF00> Furniture Distribution:
+### <b>Furniture Distribution:
 
 ```python
 df_count_furniture = df_neg_profit[df_neg_profit["Category"] == "Furniture"].groupby("Quantity")["Profit"].count()
@@ -441,7 +441,7 @@ plt.show()
    
 ![](All_files_in_one/Q_03_01_East_Region_Distribution.png)
 
-### <b><font color= #FFFF00> Office_Suppliers Distribution:
+### <b>Office_Suppliers Distribution:
 
 ```python
 df_count_Office_Supplies = df_neg_profit[df_neg_profit["Category"] == "Office Supplies"].groupby("Quantity")["Profit"].count()
@@ -503,7 +503,7 @@ plt.show()
 ![](All_files_in_one/Q_03_02_West_Region_Distribution.png)
     
 
-### <b><font color= #FFFF00> Technology Distribution:
+### <b>Technology Distribution:
 
 ```python
 df_count_Technology = df_neg_profit[df_neg_profit["Category"] == "Technology"].groupby("Quantity")["Profit"].count()
@@ -564,7 +564,7 @@ plt.show()
   
 ![](All_files_in_one/Q_03_03_North_Region_Distribution.png)   
 
-### <b><font color= #FFFF00> East Region Distribution:
+### <b>East Region Distribution:
 
 ```python
 df_neg_profit["Region"].unique()
@@ -630,7 +630,7 @@ plt.show()
 ![](All_files_in_one/Q_03_04_South_Region_Distribution.png)
     
 
-### <b><font color= #FFFF00> West Region Distribution:
+### <b>West Region Distribution:
 
 ```python
 df_profit_West = df_neg_profit[df_neg_profit["Region"] == "West"].groupby("Quantity")["Profit"].count()
@@ -690,7 +690,7 @@ plt.show()
 ```   
 ![](All_files_in_one/Q_03_05_Furniture_Distribution.png)
     
-### <b><font color= #FFFF00> North Region Distribution:
+### <b>North Region Distribution:
 
 ```python
 df_profit_North = df_neg_profit[df_neg_profit["Region"] == "North"].groupby("Quantity")["Profit"].count()
@@ -750,7 +750,7 @@ plt.show()
     
 ![](All_files_in_one/Q_03_06_Office_Supplies_Distribution.png)    
 
-### <b><font color= #FFFF00> South Region Distribution:
+### <b>South Region Distribution:
 
 ```python
 df_profit_South = df_neg_profit[df_neg_profit["Region"] == "South"].groupby("Quantity")["Profit"].count()
@@ -810,7 +810,7 @@ plt.show()
   
 ![](All_files_in_one/Q_03_07_Technology_Distribution.png)
     
-### <b><font color= #FFFF00> Overall Visualization:
+### <b>Overall Visualization:
 
 ```python
 category_sales = df_neg_profit.pivot_table(index="Quantity", columns="Category", values="Sales", aggfunc="sum")
@@ -831,13 +831,13 @@ plt.show()
   
 ![](All_files_in_one/Q_03_Heatmap_Distribution.png)
     
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 - #### The same quantities — especially `1`, `3`, and `6` units — are showing up again and again in loss-making orders.
 - #### This happens in all product categories (Furniture, Office Supplies, Technology).
 - #### It also happens in all regions (East, West, North, South).
 - #### This tells us that small quantity orders, even when they have high sales, are still not profitable.
 
-### <b><font color= #FFFF00> Q4. Optimizing Product Mix for Regions:
+### <b>Q4. Optimizing Product Mix for Regions:
 #### *For each region, find the best-selling category by volume and the most profitable category. Are they the same? What does this imply?*
 
 ```python
@@ -934,13 +934,13 @@ Furniture_negative_profit = df_north_fur_neg.groupby("Quantity")["Profit"].sum()
 sum(Furniture_negative_profit.values)
 ```
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 - #### In the East, West, and South regions, the category with the highest sales also gave the highest profit. This shows that the current product mix in these regions is working well.
 - #### In the North region, Office Supplies had the highest sales, but Furniture made more profit.
 - #### Even though the sales difference between Office Supplies and Furniture was small (₹724), the profit difference was meaningful (₹705).
 - #### On deeper analysis, Office Supplies in North had more negative profit orders, while Furniture mostly made positive profits.
 
-### <b><font color= #FFFF00> Q5. Demand Prediction Case:
+### <b>Q5. Demand Prediction Case:
 #### *Using historical data, identify if there is a trend or seasonal pattern in quantity sold for each product category over time.*
 
 ```python
@@ -987,12 +987,12 @@ plt.show()
   
 ![](All_files_in_one/Q_05_Monthly_Quantity_sold_cat.png)
     
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 #### There is both a trend and seasonality present in the quantity sold over time:
 - #### Trends: Increasing demand (especially for Office Supplies).
 - #### Seasonality: Regular peaks at specific months across years.
 
-### <b><font color= #FFFF00> Q6. Loss-Leading Product Investigation:
+### <b>Q6. Loss-Leading Product Investigation:
 #### *Find products or categories that have repeatedly shown negative profit despite high sales. Should they be discontinued or repriced?*
 
 ```python
@@ -1043,12 +1043,12 @@ tot_sum = sum(tot)
 per = (tot.values/tot_sum)*100
 ```
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 - #### The `Technology` category accounts for the highest volume of negative-profit transactions, especially in quantity groups of `1`,`5`, and `6` units.
 - #### These three quantity buckets alone contribute `45%` of loss transactions, indicating that these sales are frequent and significant.
 - #### Since these products are selling well (high sales count), it’s more financially sound to reprice them (increase unit price, reduce discount) rather than discontinue them.
 
-### <b><font color= #FFFF00> Q7. Regional Sales Consistency:
+### <b>Q7. Regional Sales Consistency:
 #### *Which region shows the most stable monthly sales performance over time? Use standard deviation or coefficient of variation to support your analysis.*
 
 ```python
@@ -1082,11 +1082,11 @@ region_sales["cv"] = region_sales["std"] / region_sales["mean"]
 region_sales.sort_values(by= "cv")
 ```
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 - #### Based on the coefficient of variation (CV) for monthly sales across regions, the North region has the most stable sales performance over time (CV = 0.36). 
 - #### This indicates less fluctuation in monthly sales, making it the most consistent region in terms of sales.
 
-### <b><font color= #FFFF00> Q8. Customer Retention Analysis:
+### <b>Q8. Customer Retention Analysis:
 #### *Based on Customer ID, find the number of repeats vs. one-time customers. How does their average profit and sales differ?*
 
 ```python
@@ -1133,12 +1133,12 @@ customer_summary["per_profit"] = round((customer_summary["Profit"]/ customer_sum
 customer_summary
 ```
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 - #### Out of all customers, only a small portion are repeat customers, and they contribute ~9% of sales and ~10.5% of profit.
 - #### The majority of revenue is currently driven by one-time customers, showing a potential gap in customer retention.
 - #### There is no significant profitability difference between repeat and one-time buyers, indicating a possible opportunity to re-engage one-time buyers into becoming repeat customers.
 
-### <b><font color= #FFFF00> Q9. Bulk Buying Patterns:
+### <b>Q9. Bulk Buying Patterns:
 #### *Are their specific cities or regions where customers consistently buy in higher quantities than average? What product categories are driving this?*
 
 ```python
@@ -1171,12 +1171,12 @@ city_agg = city_filter.groupby("City")[["Quantity"]].agg(["count","mean","std"])
 city_agg["total_avg"] = df_cit_reg["Quantity"].mean()
 ```
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 - #### The East and West regions show slightly above-average bulk buying behavior, with mean quantities above the overall average `(4.898)`.
 - #### Standard deviation across regions is relatively consistent, indicating stable purchasing patterns.
 - #### City-level analysis was inconclusive, as most cities appeared only once in the dataset and do not provide enough volume to draw meaningful conclusions.
 
-### <b><font color= #FFFF00> Q10. Sales Efficiency Score:
+### <b>Q10. Sales Efficiency Score:
 #### *Create a new metric: Profit per Unit Sold. Rank cities based on this efficiency. What actionable insights can Walmart take?*
 
 ```python
@@ -1205,7 +1205,7 @@ bottom_10_profit = df_city_cal.sort_values(by= "Per_unit").head(10)
 bottom_10_profit
 ```
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 #### A new metric, Profit per Unit Sold, was created to evaluate the sales efficiency of each city.
 - #### The top 10 cities generate high profit per unit, indicating strong product mix or premium customer segments.
 - #### The bottom 10 cities show low or negative efficiency, possibly due to high volume of low-margin items or higher return rates.
@@ -1213,7 +1213,7 @@ bottom_10_profit
 - #### Focus on expanding profitable categories in high-efficiency cities.
 - #### In low-efficiency cities, re-evaluate pricing, optimize product assortment, or address operational inefficiencies.
 
-### <b><font color= #FFFF00> Q11. Sales Efficiency Score:
+### <b>Q11. Sales Efficiency Score:
 #### *Is there a negative correlation between quantity sold and profit per unit in any region or category? What does this suggest?*
 
 
@@ -1259,11 +1259,11 @@ plt.show()
     
 ![](All_files_in_one/Q_11_Category_Heatmap.png)
     
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 - #### According to the region segment – Yes negative correlation between quantity sold and profit per unit is occurring and negative correlation value = `-0.36`.
 - #### According to the Category segment – Yes negative correlation between quantity sold and profit per unit is occurring and Occurring negative correlation value = `-0.92`.
 
-### <b><font color= #FFFF00> Q12. Campaign Impact Simulation:
+### <b>Q12. Campaign Impact Simulation:
 #### *Assume Walmart ran a 10% discount campaign in August 2024. Recalculate profit for that month and evaluate how the campaign would have affected overall profitability.*
 
 ```python
@@ -1301,14 +1301,14 @@ with_10_dis = round(overall_10_profit / df_aug_10["Profit"].count(), 2)
 with_10_dis
 ```
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 ##### *Before 10% discount: ₹25.86 profit/order*
 ##### *After discount: ₹25.78 profit/order*
 ##### *Impact = only ₹0.08 difference*
 - #### This indicates that Walmart can safely run such discount campaigns without significantly harming profitability.
 - #### If the discount leads to even a small boost in sales volume, the overall profit may actually increase.
 
-### <b><font color= #FFFF00> Q13. Return Risk Zones:
+### <b>Q13. Return Risk Zones:
 #### *If high-quantity orders with low profit are considered risky for returns, which region shows the highest risk exposure?*
 
 ```python
@@ -1355,11 +1355,11 @@ join["Profit_perc"] = (join["Profit_sum"] / join["Profit_sum"].sum()) * 100
 join
 ```
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 ##### *Based on the Region segmentation East region has Quantity count is 270, total profit is 289.05, and percentage is 11.09% contribution.*
 - #### East has high quantity but very low profit, so it is most at risk.
 
-### <b><font color= #FFFF00> Q14. Return Risk Zones:
+### <b>Q14. Return Risk Zones:
 #### *Calculate how many days (based on order date) it took each region to cross a cumulative profit of ₹5,000. Who was fastest?*
 
 ```python
@@ -1392,11 +1392,11 @@ day_count["Day_counts"] = day_count["Last_day"] - day_count["First_day"]
 day_count
 ```
 
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 - #### Based The South Region was the fastest to reach ₹1,000 profit in just 34 days from their first order date.
 - #### This shows stronger early sales momentum or better margins in that region.
 
-### <b><font color= #FFFF00> Q15. High-Impact Customer Recovery Plan:
+### <b>Q15. High-Impact Customer Recovery Plan:
 #### *Identify the bottom 5% of customers by profit. Suggest a personalized sales strategy for them based on their past order behaviour.*
 
 ```python
@@ -1438,7 +1438,7 @@ analysis_bottom["Profit_per"] = round((analysis_bottom["Profit"] / analysis_bott
 ```python
 analysis_bottom
 ```
-### <b> <font color= #ABFF00> Conclusion:
+### <b>Conclusion:
 #### All 48 customers in the bottom 5% are one-time customers.
 #### High-quantity buyers (Qty > 4) among them are responsible for:
 - #### *80% of Quantity*
